@@ -10,11 +10,11 @@ const routes = [
   },
   {
     path: '/admin',
-    component: () => import('@/views/Dashboard.vue'),
+    component: () => import('@/views/Front/Dashboard.vue'),
     children: [
       {
         path: 'products',
-        component: () => import('@/views/Products.vue')
+        component: () => import('@/views/admin/Products.vue')
       }
     ]
   },
