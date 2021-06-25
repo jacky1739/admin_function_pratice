@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     getProducts () {
-      const api = `${process.env.VUE_APP_PATH}api/${process.env.VUE_APP_API}/admin/products`
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products`
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           // console.log(res.data.result.token)
@@ -90,6 +90,7 @@ export default {
   created () {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
     this.$http.defaults.headers.common.Authorization = `${token}`
+    console.log(token)
     this.getProducts()
   }
 }
