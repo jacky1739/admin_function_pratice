@@ -12,8 +12,8 @@
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="exampleModalLabel">
-            <span v-if="isNew">新增產品</span>
-            <span v-else>編輯產品</span>
+            <!-- <span v-if="isNew">新增產品</span>
+            <span v-else>編輯產品</span> -->
           </h5>
           <button
             type="button"
@@ -31,7 +31,6 @@
                   type="text"
                   class="form-control"
                   id="image"
-                  v-model="tempProduct.imageUrl"
                   placeholder="請輸入圖片連結"
                 />
               </div>
@@ -40,7 +39,6 @@
                   >或 上傳圖片
                   <i
                     class="fas fa-spinner fa-spin"
-                    v-if="status.fileUploading"
                   ></i>
                 </label>
                 <input
@@ -51,40 +49,30 @@
                   @change="uploadFile"
                 />
               </div>
-              <img class="img-fluid" :src="tempProduct.imageUrl" />
+              <img class="img-fluid"/>
               <!-- 延伸技巧，多圖 -->
-              <div class="mt-5" v-if="tempProduct.imagesUrl">
+              <div class="mt-5">
                 <div
-                  v-for="(image, key) in tempProduct.imagesUrl"
                   class="mb-3"
-                  :key="key"
                 >
                   <input
                     type="url"
                     class="form-control form-control"
-                    v-model="tempProduct.imagesUrl[key]"
                     placeholder="請輸入連結"
                   />
                   <div>
-                    <img class="img-fluid" :src="image"/>
+                    <img class="img-fluid" />
                   </div>
                   <button
                     type="button"
                     class="btn btn-outline-danger"
-                    @click="tempProduct.imagesUrl.splice(key, 1)"
                   >
                     移除
                   </button>
                 </div>
-                <div
-                  v-if="
-                    tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1] ||
-                    !tempProduct.imagesUrl.length
-                  "
-                >
+                <div>
                   <button
                     class="btn btn-outline-primary btn-sm d-block w-100"
-                    @click="tempProduct.imagesUrl.push('')"
                   >
                     新增圖片
                   </button>
@@ -98,7 +86,6 @@
                   type="text"
                   class="form-control"
                   id="title"
-                  v-model="tempProduct.title"
                   placeholder="請輸入標題"
                 />
               </div>
@@ -110,7 +97,6 @@
                     type="text"
                     class="form-control"
                     id="category"
-                    v-model="tempProduct.category"
                     placeholder="請輸入分類"
                   />
                 </div>
@@ -120,7 +106,6 @@
                     type="text"
                     class="form-control"
                     id="unit"
-                    v-model="tempProduct.unit"
                     placeholder="請輸入單位"
                   />
                 </div>
@@ -134,7 +119,6 @@
                     class="form-control"
                     id="origin_price"
                     min="0"
-                    v-model.number="tempProduct.origin_price"
                     placeholder="請輸入原價"
                   />
                 </div>
@@ -144,7 +128,6 @@
                     type="number"
                     class="form-control"
                     id="price"
-                    v-model.number="tempProduct.price"
                     min="0"
                     placeholder="請輸入售價"
                   />
@@ -158,7 +141,6 @@
                   type="text"
                   class="form-control"
                   id="description"
-                  v-model="tempProduct.description"
                   placeholder="請輸入產品描述"
                 ></textarea>
               </div>
@@ -168,7 +150,6 @@
                   type="text"
                   class="form-control"
                   id="content"
-                  v-model="tempProduct.content"
                   placeholder="請輸入產品說明內容"
                 ></textarea>
               </div>
@@ -177,9 +158,6 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    v-model="tempProduct.is_enabled"
-                    :true-value="1"
-                    :false-value="0"
                     id="is_enabled"
                   />
                   <label class="form-check-label" for="is_enabled">
@@ -201,7 +179,6 @@
           <button
             type="button"
             class="btn btn-primary"
-            @click="$emit('update-product', tempProduct)"
           >
             確認
           </button>
@@ -210,3 +187,12 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+    }
+  }
+}
+</script>

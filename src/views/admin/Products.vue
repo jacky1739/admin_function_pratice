@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     產品列表
+    <div class="d-flex justify-content-end mt-4">
+      <button class="btn btn-primary">
+        建立新的產品
+      </button>
+    </div>
     <table class="table">
       <thead>
             <tr>
@@ -34,10 +39,10 @@
          </td>
          <td>
            <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal('edit', item)">
+            <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal">
               編輯
             </button>
-            <button type="button" class="btn btn-outline-danger btn-sm" @click="openModal('delete', item)">
+            <button type="button" class="btn btn-outline-danger btn-sm">
               刪除
             </button>
           </div>
@@ -46,15 +51,19 @@
       </tbody>
     </table>
     <pagination></pagination>
+    <!-- ProductModal -->
+    <ProductModal ref="productModal"></ProductModal>
   </div>
 </template>
 
 <script>
 import pagination from '@/components/Pagination.vue'
+import ProductModal from '@/components/ProductModal.vue'
 
 export default {
   components: {
-    pagination
+    pagination,
+    ProductModal
   },
   data () {
     return {
@@ -85,6 +94,11 @@ export default {
           console.log(this.products, this.pagination)
         }
       })
+    },
+    openModal () {
+      // const productComponent = this.$refs.productModal
+      // productComponent.openModal()
+      console.log('click')
     }
   },
   created () {
@@ -92,6 +106,8 @@ export default {
     this.$http.defaults.headers.common.Authorization = `${token}`
     console.log(token)
     this.getProducts()
+    const productComponent = this.$refs.productModal
+    productComponent.openModal()
   }
 }
 </script>
