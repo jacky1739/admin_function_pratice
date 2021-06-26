@@ -51,6 +51,7 @@
       </tbody>
     </table>
     <pagination></pagination>
+    <input type="text" ref="text">
     <!-- ProductModal -->
     <ProductModal ref="productModal"></ProductModal>
   </div>
@@ -98,7 +99,8 @@ export default {
     openModal () {
       // const productComponent = this.$refs.productModal
       // productComponent.openModal()
-      console.log('click')
+      console.log(this.$refs.productModal, this.$refs)
+      this.$refs.productModal.show()
     }
   },
   created () {
@@ -106,8 +108,6 @@ export default {
     this.$http.defaults.headers.common.Authorization = `${token}`
     console.log(token)
     this.getProducts()
-    const productComponent = this.$refs.productModal
-    productComponent.openModal()
   }
 }
 </script>
